@@ -1,4 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  
+    <picker mode="multiSelector" range="{{todoList}}" range-key="name" bindchange="onChange" bindcolumnchange="onColumnChange">
+        <text>请选择待办项</text>
+    </picker>
 </view>

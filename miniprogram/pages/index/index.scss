@@ -1,4 +1,8 @@
 /**index.wxss**/
 .container {
-  background: #eee;
+  padding: 20rpx;
+  picker {
+    border: 2rpx solid #eee;
+    padding: 4rpx;
+  }
 }

@@ -9,6 +9,17 @@
     "navigationBarTitleText": "ticker",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "ticker"
+      }, {
+        "pagePath": "pages/settings/settings",
+        "text": "settings"
+      }
+    ]
+  },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }
