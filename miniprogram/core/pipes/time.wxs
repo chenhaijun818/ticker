@@ -1,0 +1,16 @@
+module.exports = function (ms) {
+    var s = Math.floor(ms / 1000);
+    var hh = Math.floor(s / (60 * 60));
+    s = s % (60 * 60);
+    var mm = Math.floor(s / 60);
+    s = s % 60;
+    var ss = s;
+    var str = ss + '秒';
+    if (mm) {
+        str = mm + '分' + str;
+    }
+    if (hh) {
+        str = hh + '时' + str;
+    }
+    return str;
+}
