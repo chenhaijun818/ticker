@@ -1,16 +1,16 @@
 <!--index.wxml-->
 <wxs src="../../core/pipes/time.wxs" module="time"></wxs>
-<view class="container {{countup ? 'red' : ''}} {{(countdown && todo) ? 'yellow': ''}} {{countdown && !todo ? 'green': ''}}">
-    <view class="todo" wx:if="{{todo}}">
-        <view>当前项目：{{todo.name}}</view>
+<view class="container {{countup ? 'red' : ''}} {{(countdown && todos.length) ? 'yellow': ''}} {{countdown && !todos.length ? 'green': ''}}">
+    <view class="todos">
+        <view wx:for="{{todos}}" wx:key="id" wx:for-item="todo">{{todo.name}}</view>
     </view>
     <view class="countdown">
-        <text wx:if="{{!todo}}">正在休息...</text>
-        <text wx:if="{{countdown}}">剩余: {{time(countdown * 1000)}}</text>
-        <text wx:if="{{countup}}">已超时: {{time(countup * 1000)}}</text>
+        <text wx:if="{{!todos.length}}">正在休息...</text>
+        <text wx:if="{{countdown}}">{{time(countdown * 1000)}}</text>
+        <text wx:if="{{countup}}">{{time(countup * 1000)}}</text>
     </view>
     <view class="buttons">
-        <button class="blue" bindtap="startStudy" wx:if="{{!todo}}">开始学习</button>
-<!--        <button class="green" bindtap="startRest">开始休息</button>-->
+        <button class="blue" bindtap="startStudy" wx:if="{{!todos.length}}">开始学习</button>
+        <button class="green" bindtap="startRest" wx:if="{{todos.length}}">开始休息</button>
     </view>
 </view>

@@ -11,11 +11,11 @@ interface BeforeInterceptor {
 *   @param verify 本次请求是否要验证登录信息
 * */
 interface Request {
-    header: any,
-    params: object,
-    url: string,
-    verify: boolean,
-    method: 'GET' | 'POST'
+    header: any;
+    params: object;
+    url: string;
+    verify: boolean;
+    method: 'GET' | 'POST';
 }
 
 // 定义后置拦截器
@@ -30,22 +30,21 @@ interface AfterInterceptor {
 *   @param message 请求结果的文字说明
 * */
 interface Response {
-    code: number,
-    data: any,
-    message: string
-    options?: any
+    code: number;
+    data: any;
+    message: string;
+    options?: any;
 }
 
 
 // 主类
 export class Client {
-    // 存放前置拦截器
-    beforeInterceptors: Array<BeforeInterceptor> = [];
-    // 存放后置拦截器
-    afterInterceptors: Array<AfterInterceptor> = [];
-
     // 实现单例模式
-    static instance: Client
+    static instance: Client;
+    // 存放前置拦截器
+    beforeInterceptors: BeforeInterceptor[] = [];
+    // 存放后置拦截器
+    afterInterceptors: AfterInterceptor[] = [];
 
     constructor() {
         return Client.instance = Client.instance || this;

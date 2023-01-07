@@ -10,8 +10,14 @@ page {
   align-items: center;
   justify-content: center;
   height: 95vh;
-  font-size: 40rpx;
   line-height: 1.8;
+  .todos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40rpx;
+    font-size: 48rpx;
+  }
  .buttons {
    margin-top: 20rpx;
    display: flex;
