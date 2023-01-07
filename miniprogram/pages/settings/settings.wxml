@@ -1,16 +1,6 @@
-<!--pages/settings/settings.wxml-->
 <view class="container">
-    <view>添加待办</view>
-    <view class="field">
-        <text>名称:</text>
-        <input model:value="{{name}}" placeholder="请输入待办项名称"/>
+    <todo wx:for="{{todoList}}" wx:key="id" wx:for-item="todo" todo="{{todo}}" bindchange="getTodoList"></todo>
+    <view class="buttons">
+        <button bindtap="add">添加根节点</button>
     </view>
-    <view class="field">
-        <text>父级:</text>
-        <picker mode="selector" range="{{todoList}}" range-key="name" bindchange="onChooseParent">
-            <text wx:if="{{!parent}}">请选择父级（不选择将成为根节点）</text>
-            <text wx:if="{{parent}}">{{parent.name}}</text>
-        </picker>
-    </view>
-    <button bindtap="submit">确认添加</button>
 </view>

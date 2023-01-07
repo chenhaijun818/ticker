@@ -1,7 +1,3 @@
-import {ModalService} from "./modal.service";
-
-const modal = new ModalService();
-
 // 封装一些常用弹窗和提示的ui方法
 export class UiService {
     private static instance: any;
@@ -51,14 +47,14 @@ export class UiService {
     *   @param options 其它配置
     *   @returns Promise<boolean> 异步返回用户的选择
     * */
-    confirm(msg: any, title = '提示', options: any = {}): Promise<boolean> {
+    confirm(msg: any, title = '提示', options: any = {}): Promise<any> {
         options.confirmText = options.confirmText || '确定';
         options.confirmColor = options.confirmColor || '#333';
         options.cancelColor = options.cancelColor || '#999';
         options.cancelText = options.cancelText || '取消';
         options.title = title;
         options.content = msg;
-        return modal.showModal(options);
+        return (wx.showModal(options) as Promise<any>).then(res => res.confirm);
     }
 
     /*

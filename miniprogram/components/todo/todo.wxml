@@ -1,0 +1,8 @@
+<view class="container">
+    <view class="caption">
+        <text class="name">{{todo.name}}</text>
+        <view class="button" bindtap="add">+</view>
+        <view class="button" bindtap="remove">-</view>
+    </view>
+    <todo wx:for="{{todo.children}}" wx:key="id" wx:for-item="child" todo="{{child}}" bindchange="onChange"></todo>
+</view>

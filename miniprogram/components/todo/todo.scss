@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+.container {
+  .caption {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    .name {
+      margin-right: 30rpx;
+    }
+    .button {
+      background: #eee;
+      width: 1em;
+      height: 1em;
+      margin: 0 10rpx;
+      line-height: 1;
+      text-align: center;
+    }
+  }
+  todo {
+    padding-left: 64rpx;
+  }
+}

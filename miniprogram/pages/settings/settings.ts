@@ -1,47 +1,85 @@
 // pages/settings/settings.ts
 import {Client} from "../../core/client";
 import {Todo} from "../../models/todo";
+import {UiService} from "../../core/ui.service";
 
 const client = new Client();
+const ui = new UiService();
 Page<{
-    name: string;
     parent: Todo | null;
     todoList: Todo[];
+    delTodo: Todo | null
 }, {
     getTodoList(): void;
-    onChooseParent(): void;
-    submit(): void;
+    onChooseParent(e: any): void;
+    onChooseDelete(e: any): void;
+    add(): void;
+    delete(): void;
 }>({
     data: {
-        name: '',
         parent: null,
-        todoList: []
+        todoList: [],
+        delTodo: null
     },
     onLoad() {
         this.getTodoList();
     },
     getTodoList() {
-        client.get('todoList').then((res: any) => {
-            const list: Todo[] = [];
+        return client.get('todoList').then((res: any) => {
             if (res && res.list) {
-                res.list.forEach((i: any) => list.push(new Todo(i)))
+                const list: Todo[] = [];
+                const todoList: any[] = [];
+                const map: any = {};
+                res.list.forEach((i: any) => {
+                    const todo = new Todo(i);
+                    list.push(todo);
+                    const pid = todo.pid || 'root';
+                    if (map[pid]) {
+                        map[pid].push(todo)
+                    } else {
+                        map[pid] = [todo];
+                    }
+                });
+                const pids = Object.keys(map);
+                pids.forEach((pid: string) => {
+                    if (pid === 'root') {
+                        todoList.push(...map[pid])
+                    } else {
+                        const parent: any = list.find(todo => todo.id === pid);
+                        if (parent) {
+                            parent.children.push(...map[pid])
+                        }
+                    }
+                });
+                this.setData({todoList: todoList})
             }
-            this.setData({todoList: list})
         })
     },
     onChooseParent(e: any) {
         const parent = this.data.todoList[e.detail.value];
         this.setData({parent})
     },
-    submit() {
-        if (!this.data.name) {
-            return
+    onChooseDelete(e: any) {
+        const delTodo = this.data.todoList[e.detail.value];
+        this.setData({delTodo})
+    },
+    async add() {
+        const name = await ui.input('请输入待办名称');
+        if (!name) {
+            return;
         }
-        const pid = this.data.parent?.id;
-        client.post('add', {name: this.data.name, pid}).then(res => {
+        client.post('add', {name}).then(res => {
             if (res) {
                 this.getTodoList();
-                this.setData({name: '', parent: null})
+            }
+        })
+    },
+    delete() {
+        ui.confirm('您确定要删除该待办吗？').then(confirm => {
+            if (confirm) {
+                client.post('delete', {id: this.data.delTodo?.id}).then(res => {
+                    console.log(res)
+                })
             }
         })
     }

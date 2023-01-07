@@ -1,11 +1,10 @@
 /* pages/settings/settings.wxss */
 .container {
   padding: 20rpx;
-  input, picker {
-    border: 1px solid #eee;
-    padding: 4rpx;
+  todo {
+    margin: 20rpx 0;
   }
-  .field {
-    margin-bottom: 20rpx;
+  .buttons {
+    margin-top: 20rpx;
   }
 }
