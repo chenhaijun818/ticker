@@ -1,0 +1,5 @@
+<!--core/components/anchor/anchor.wxml-->
+
+<modal wx:for="{{modals}}" wx:key="id" wx:for-item="modal" modal="{{modal}}" catchtouchmove="touchmove">
+    <text slot="content">{{modal.content}}</text>
+</modal>

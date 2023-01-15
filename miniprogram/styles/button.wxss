@@ -1,0 +1,48 @@
+@import "theme.wxss";
+/*通用按钮*/
+
+button {
+    border: none;
+    padding: 0;
+    font-weight: normal;
+    font-size: 28rpx;
+    margin: 0;
+}
+
+button::after {
+    border: none;
+}
+
+button.button {
+    display: inline-block;
+    padding: 10rpx 30rpx;
+    border-radius: 100rpx;
+    line-height: inherit;
+    background: #f0f0f0;
+    color: #888;
+}
+
+button.button::after {
+    display: none;
+}
+
+button.button.primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+button.button.secondary {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+button.button.disabled {
+    opacity: 0.6;
+}
+
+button.button.full {
+    width: 100%;
+    padding: 30rpx;
+}
+
+/*通用按钮end*/

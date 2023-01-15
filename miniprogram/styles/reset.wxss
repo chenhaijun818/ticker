@@ -1,0 +1,9 @@
+
+page {
+    font-size: 30rpx;
+    color: #666;
+}
+
+page, view, text, input, textarea, picker, scroll-view {
+    box-sizing: border-box;
+}

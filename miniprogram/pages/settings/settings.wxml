@@ -1,6 +1,7 @@
 <view class="container">
     <todo wx:for="{{todoList}}" wx:key="id" wx:for-item="todo" todo="{{todo}}" bindchange="getTodoList"></todo>
     <view class="buttons">
-        <button bindtap="add">添加根节点</button>
+        <button class="button primary" bindtap="add">添加根节点</button>
     </view>
 </view>
+<anchor></anchor>

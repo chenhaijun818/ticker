@@ -23,6 +23,8 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "todo": "./components/todo/todo"
+    "todo": "./components/todo/todo",
+    "anchor": "./components/anchor/anchor",
+    "modal": "./components/modal/modal"
   }
 }

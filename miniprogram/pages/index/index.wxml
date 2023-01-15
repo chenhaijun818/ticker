@@ -10,7 +10,7 @@
         <text wx:if="{{countup}}">{{time(countup * 1000)}}</text>
     </view>
     <view class="buttons">
-        <button class="blue" bindtap="startStudy" wx:if="{{!todos.length}}">开始学习</button>
-        <button class="green" bindtap="startRest" wx:if="{{todos.length}}">开始休息</button>
+        <button class="button primary" bindtap="startStudy" wx:if="{{!todos.length}}">开始学习</button>
+        <button class="button" bindtap="startRest" wx:if="{{todos.length}}">开始休息</button>
     </view>
 </view>

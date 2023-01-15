@@ -22,6 +22,8 @@ Page<{
         delTodo: null
     },
     onLoad() {
+    },
+    onShow() {
         this.getTodoList();
     },
     getTodoList() {
@@ -78,7 +80,9 @@ Page<{
         ui.confirm('您确定要删除该待办吗？').then(confirm => {
             if (confirm) {
                 client.post('delete', {id: this.data.delTodo?.id}).then(res => {
-                    console.log(res)
+                    if (res) {
+                        ui.toast('删除成功')
+                    }
                 })
             }
         })

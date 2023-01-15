@@ -1,4 +1,8 @@
 // 封装一些常用弹窗和提示的ui方法
+import {ModalService} from "./modal.service";
+
+const modal = new ModalService();
+
 export class UiService {
     private static instance: any;
 
@@ -61,20 +65,7 @@ export class UiService {
     *   弹窗输入
     * */
     input(title: string): Promise<string | void> {
-        return new Promise(resolve => {
-            wx.showModal({
-                title,
-                editable: true,
-                placeholderText: '请输入',
-                success(res) {
-                    if (res.confirm && res.content) {
-                        resolve(res.content);
-                    } else {
-                        resolve();
-                    }
-                }
-            })
-        })
+        return modal.showModal({title, editable: true});
     }
 
     /*

@@ -1,0 +1,27 @@
+/*主题色*/
+page {
+    --primary: #3082ef;
+    --secondary: #f17d27;
+    --shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+    --danger: red;
+}
+
+.text-primary {
+    color: #e54d42;
+}
+
+.text-secondary {
+    color: #f37b1d;
+}
+
+.text-red {
+    color: red;
+}
+
+.text-green {
+    color: #09bb07;
+}
+
+.text-gray {
+    color: #888;
+}

@@ -1,0 +1,14 @@
+
+/*尽量少用*/
+.flex {
+    display: flex;
+}
+
+/*给所有icon-开头的class配置iconfont字体*/
+[class^='icon-'] {
+    font-family: 'iconfont', sans-serif !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+

@@ -1,0 +1,52 @@
+/* core/components/modal/modal.wxss */
+@import "/styles/theme.wxss";
+@import "/styles/button.wxss";
+:host {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.main {
+    background-color: #fff;
+    width: 70vw;
+    border-radius: 20rpx;
+    padding: 20rpx;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24rpx;
+}
+
+.content {
+    padding: 24rpx;
+    max-height: 40vh;
+    min-height: 2em;
+}
+
+.content input {
+    border: 1px solid #ccc;
+    padding: 6rpx;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 24rpx;
+}
+
+button.cancel,button.confirm {
+    padding: 18rpx 60rpx;
+}
+

@@ -14,6 +14,9 @@ Page({
     todoMap: new Map(),
     todoList: [] as any,
     onLoad() {
+
+    },
+    onShow() {
         this.getTodoList().then(() => {
             this.startTick();
         });

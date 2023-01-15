@@ -1,25 +1,5 @@
 /**app.wxss**/
-
-button {
-  padding: 6rpx 1em;
-  margin-left: 0;
-  margin-right: 0;
-  font-size: 32rpx;
-  font-weight: normal;
-  width: auto !important;
-}
-
-button.red {
-  color: #fff;
-  background: red;
-}
-
-button.green {
-  color: #fff;
-  background: green;
-}
-
-button.blue {
-  color: #fff;
-  background: blue;
-}
+@import "./styles/reset.wxss";
+@import "./styles/common.wxss";
+@import "./styles/theme.wxss";
+@import "./styles/button.wxss";
