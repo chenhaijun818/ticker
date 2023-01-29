@@ -82,6 +82,7 @@ Page({
         const ids = todos.map(t => t.id).join(',')
         wx.setStorageSync('tids', ids);
         this.setTodos();
+        this.setData({countup: 0});
         this.startTick();
     },
     // 开始休息
@@ -90,6 +91,7 @@ Page({
         wx.setStorageSync('startTime', now);
         wx.removeStorageSync('tids');
         this.setTodos();
+        this.setData({countup: 0});
         this.startTick();
     },
     // 随机选择一个待办事项

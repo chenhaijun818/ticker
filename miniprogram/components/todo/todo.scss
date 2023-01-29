@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     line-height: 1;
+    color: #666;
     .name {
       margin-right: 30rpx;
     }
@@ -18,7 +19,16 @@
       text-align: center;
     }
   }
+  .caption.parent {
+    font-weight: bold;
+    color: #000;
+  }
   todo {
     padding-left: 64rpx;
   }
+}
+
+.container.close {
+  height: 1em;
+  overflow: hidden;
 }

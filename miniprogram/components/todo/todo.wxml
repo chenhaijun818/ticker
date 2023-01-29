@@ -1,6 +1,6 @@
-<view class="container">
-    <view class="caption">
-        <text class="name">{{todo.name}}</text>
+<view class="container {{close ? 'close' : ''}}">
+    <view class="caption {{todo.children.length ? 'parent' : ''}}">
+        <text class="name" bindtap="toggle">{{todo.name}}</text>
         <view class="button" bindtap="add">+</view>
         <view class="button" bindtap="remove">-</view>
     </view>

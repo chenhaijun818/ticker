@@ -9,12 +9,17 @@ Component({
             type: Object
         }
     },
-    data: {},
+    data: {
+        close: true
+    },
     lifetimes: {
         attached() {
         }
     },
     methods: {
+        toggle() {
+            this.setData({close: !this.data.close})
+        },
         async add() {
             const name = await ui.input('请输入待办名称');
             if (!name) {
