@@ -7,8 +7,8 @@ Page({
     data: {
         todoList: [] as any,
         todos: [] as any,
-        countdown: 0,
-        countup: 0
+        countup: 0,
+        todoTime: 30 * 60 * 1000
     },
     ticker: 0,
     todoMap: new Map(),
@@ -18,7 +18,11 @@ Page({
     },
     onShow() {
         this.getTodoList().then(() => {
-            this.startTick();
+            const startTime = wx.getStorageSync('startTime');
+            if (startTime) {
+                this.startTick();
+                this.setTodos();
+            }
         });
     },
     getTodoList() {
@@ -55,6 +59,7 @@ Page({
             }
         })
     },
+    // 开始循环
     startTick() {
         if (this.ticker) {
             clearInterval(this.ticker);
@@ -64,40 +69,35 @@ Page({
             if (!startTime) {
                 return;
             }
-            const time = 30 * 60 * 1000;
             const now = Date.now();
             const usedTime = now - startTime;
-            const tids = wx.getStorageSync('tids');
-            const todos = tids.split(',').filter((tid: string) => tid).map((tid: string) => this.todoMap.get(tid))
-            if (usedTime > time) {
-                if (tids) {
-                    // 说明正在学习
-                    wx.removeStorageSync('tid');
-                    wx.removeStorageSync('startTime');
-                    this.startRest();
-                }
-                const countup = Math.floor((usedTime - time) / 1000);
-                this.setData({countup, countdown: 0, todos: []})
-            } else {
-                const countdown = Math.floor((time - usedTime) / 1000);
-                this.setData({countdown, countup: 0, todos: todos})
-            }
+            this.setData({countup: usedTime})
         }, 1000);
     },
+    // 开始学习
     startStudy() {
         const now = Date.now();
         wx.setStorageSync('startTime', now);
         const todos: Todo[] = this.chooseTodo([]);
         const ids = todos.map(t => t.id).join(',')
         wx.setStorageSync('tids', ids);
+        this.setTodos();
         this.startTick();
     },
+    // 开始休息
+    startRest() {
+        const now = Date.now();
+        wx.setStorageSync('startTime', now);
+        wx.removeStorageSync('tids');
+        this.setTodos();
+        this.startTick();
+    },
+    // 随机选择一个待办事项
     chooseTodo(todos: Todo[]): Todo[] {
         if (!todos.length) {
             const todo: Todo = this.random(this.todoList);
             todos.push(todo);
         }
-        console.log(todos)
         const todo = todos[todos.length - 1];
         if (!todo!.children.length) {
             return todos
@@ -106,14 +106,15 @@ Page({
         todos.push(child);
         return this.chooseTodo(todos);
     },
+    // 根据选择的待办id生成待办项的数据
+    setTodos() {
+        const tids = wx.getStorageSync('tids');
+        const todos = tids.split(',').filter((tid: string) => tid).map((tid: string) => this.todoMap.get(tid))
+        this.setData({todos});
+    },
+    // 随机选取数组的其中一个
     random(list: Todo[]): Todo {
         const index = Math.floor(Math.random() * list.length);
         return list[index];
-    },
-    startRest() {
-        const now = Date.now();
-        wx.setStorageSync('startTime', now);
-        wx.removeStorageSync('tids');
-        this.startTick();
     }
 })

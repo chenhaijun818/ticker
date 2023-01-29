@@ -1,16 +1,16 @@
 <!--index.wxml-->
 <wxs src="../../core/pipes/time.wxs" module="time"></wxs>
-<view class="container {{countup ? 'red' : ''}} {{(countdown && todos.length) ? 'yellow': ''}} {{countdown && !todos.length ? 'green': ''}}">
+<view class="container {{(todos.length && countup > todoTime) ? 'green' : ''}} {{(!todos.length && countup > todoTime) ? 'red' : ''}}">
     <view class="todos">
         <view wx:for="{{todos}}" wx:key="id" wx:for-item="todo">{{todo.name}}</view>
     </view>
     <view class="countdown">
         <text wx:if="{{!todos.length}}">正在休息...</text>
-        <text wx:if="{{countdown}}">{{time(countdown * 1000)}}</text>
-        <text wx:if="{{countup}}">{{time(countup * 1000)}}</text>
+        <text wx:if="{{todos.length}}">正在学习...</text>
+        <text wx:if="{{countup}}">{{time(countup)}}</text>
     </view>
     <view class="buttons">
         <button class="button primary" bindtap="startStudy" wx:if="{{!todos.length}}">开始学习</button>
-        <button class="button" bindtap="startRest" wx:if="{{todos.length}}">开始休息</button>
+        <button class="button primary" bindtap="startRest" wx:if="{{todos.length}}">开始休息</button>
     </view>
 </view>
