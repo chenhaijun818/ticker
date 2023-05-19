@@ -44,6 +44,14 @@ Component({
                 }
             })
         },
+        doit() {
+            this.triggerEvent('doit', {tid: this.data.todo.id})
+            // wx.navigateTo({url: `/pages/index/index?todo=${this.data.todo.id}`})
+            // wx.switchTab({url: `/pages/index/index?todo=${this.data.todo.id}`})
+        },
+        onDoit(event: any) {
+            this.triggerEvent('doit', event.detail)
+        },
         onChange() {
             this.triggerEvent('change')
         }

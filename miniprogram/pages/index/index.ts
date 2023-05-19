@@ -17,6 +17,7 @@ Page({
 
     },
     onShow() {
+        console.log('index on show')
         this.getTodoList().then(() => {
             const startTime = wx.getStorageSync('startTime');
             if (startTime) {

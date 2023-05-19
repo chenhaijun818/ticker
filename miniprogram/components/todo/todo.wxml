@@ -3,6 +3,7 @@
         <text class="name" bindtap="toggle">{{todo.name}}</text>
         <view class="button" bindtap="add">+</view>
         <view class="button" bindtap="remove">-</view>
+        <view class="button" bindtap="doit" wx:if="{{!todo.children.length}}">*</view>
     </view>
-    <todo wx:for="{{todo.children}}" wx:key="id" wx:for-item="child" todo="{{child}}" bindchange="onChange"></todo>
+    <todo wx:for="{{todo.children}}" wx:key="id" wx:for-item="child" todo="{{child}}" bindchange="onChange" binddoit="onDoit"></todo>
 </view>

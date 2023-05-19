@@ -15,12 +15,15 @@ Page<{
     onChooseDelete(e: any): void;
     add(): void;
     delete(): void;
+    onDoit(event: any): void;
+    todoMap: Map<string, Todo>;
 }>({
     data: {
         parent: null,
         todoList: [],
         delTodo: null
     },
+    todoMap: new Map(),
     onLoad() {
     },
     onShow() {
@@ -35,6 +38,7 @@ Page<{
                 res.list.forEach((i: any) => {
                     const todo = new Todo(i);
                     list.push(todo);
+                    this.todoMap.set(todo.id, todo);
                     const pid = todo.pid || 'root';
                     if (map[pid]) {
                         map[pid].push(todo)
@@ -75,6 +79,27 @@ Page<{
                 this.getTodoList();
             }
         })
+    },
+    onDoit(event: any) {
+        const now = Date.now();
+        wx.setStorageSync('startTime', now);
+        const tid = event.detail.tid;
+        const todo: Todo = this.todoMap.get(tid) as Todo;
+        const todos: Todo[] = [];
+        const todoMap = this.todoMap;
+        setTodos(todo);
+        const ids = todos.map(t => t.id).join(',')
+        wx.setStorageSync('tids', ids);
+        wx.switchTab({url: '/pages/index/index'})
+        function setTodos(todo: Todo) {
+            todos.unshift(todo);
+            if (todo.pid) {
+                const parent = todoMap.get(todo.pid);
+                if (parent) {
+                    setTodos(parent)
+                }
+            }
+        }
     },
     delete() {
         ui.confirm('您确定要删除该待办吗？').then(confirm => {
