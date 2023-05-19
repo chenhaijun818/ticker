@@ -10,13 +10,18 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "selectedColor": "#1296db",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "ticker"
+        "iconPath": "assets/icons/clock.png",
+        "selectedIconPath": "assets/icons/clock-fill.png",
+        "text": "定时器"
       }, {
+        "iconPath": "assets/icons/database.png",
+        "selectedIconPath": "assets/icons/database-fill.png",
         "pagePath": "pages/settings/settings",
-        "text": "settings"
+        "text": "项目"
       }
     ]
   },
