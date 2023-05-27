@@ -1,0 +1,5 @@
+<!--pages/login/login.wxml-->
+<view class="buttons">
+  <button bindtap="login">login</button>
+  <button bindtap="test">test</button>
+</view>

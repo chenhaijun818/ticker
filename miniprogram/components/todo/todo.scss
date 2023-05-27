@@ -1,3 +1,5 @@
+@import "/styles/icons/iconfont.wxss";
+
 :host {
   display: block;
 }
@@ -5,21 +7,26 @@
   .caption {
     display: flex;
     align-items: center;
-    line-height: 1;
     color: #666;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 0.5em;
+    background: #f3f3f3;
+    justify-content: space-between;
+
     .name {
       margin-right: 30rpx;
     }
-    .button {
-      background: #eee;
-      width: 1em;
-      height: 1em;
-      margin: 0 10rpx;
-      line-height: 1;
-      text-align: center;
-    }
+    //.button {
+    //  background: #eee;
+    //  width: 1em;
+    //  height: 1em;
+    //  margin: 0 10rpx;
+    //  line-height: 1;
+    //  text-align: center;
+    //}
   }
-  .caption.parent {
+  .caption.parent .name {
     font-weight: bold;
     color: #000;
   }
@@ -29,6 +36,6 @@
 }
 
 .container.close {
-  height: 1em;
+  height: 2em;
   overflow: hidden;
 }

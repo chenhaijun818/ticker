@@ -20,6 +20,24 @@ Component({
         toggle() {
             this.setData({close: !this.data.close})
         },
+        onActionSheet() {
+            wx.showActionSheet({
+                itemList: ['修改', '添加子项目', '删除项目', '立即执行', 'disable']
+            }).then(res => {
+                if (res.tapIndex === 0) {
+                    console.log('edit')
+                }
+                if (res.tapIndex === 1) {
+                    this.add();
+                }
+                if (res.tapIndex === 2) {
+                    this.remove();
+                }
+                if (res.tapIndex === 3) {
+                    this.doit()
+                }
+            }).catch(console.log)
+        },
         async add() {
             const name = await ui.input('请输入待办名称');
             if (!name) {

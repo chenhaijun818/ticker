@@ -3,10 +3,11 @@
   padding: 20rpx;
   todo {
     margin: 20rpx 0;
-    padding: 10rpx;
-    background: #f7f7f7;
   }
   .buttons {
-    margin-top: 20rpx;
+    display: flex;
+    justify-content: center;
+    margin-top: 50rpx;
+    font-size: 32rpx;
   }
 }

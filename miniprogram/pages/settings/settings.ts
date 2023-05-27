@@ -54,6 +54,8 @@ Page<{
                         const parent: any = list.find(todo => todo.id === pid);
                         if (parent) {
                             parent.children.push(...map[pid])
+                        } else {
+                            todoList.push(...map[pid])
                         }
                     }
                 });
