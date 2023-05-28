@@ -1,7 +1,8 @@
-<view class="container">
+<view wx:if="{{token}}" class="container">
     <todo wx:for="{{todoList}}" wx:key="id" wx:for-item="todo" todo="{{todo}}" bindchange="getTodoList" binddoit="onDoit"></todo>
     <view class="buttons">
         <button class="button primary" bindtap="add">添加根节点</button>
     </view>
 </view>
+<login wx:if="{{!token}}" bindlogged="onShow"></login>
 <anchor></anchor>

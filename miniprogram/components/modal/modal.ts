@@ -21,7 +21,6 @@ Component({
      */
     data: {
         value: ''
-        // modals: [] as Array<any>
     },
 
     /**

@@ -32,6 +32,7 @@
   "usingComponents": {
     "todo": "./components/todo/todo",
     "anchor": "./components/anchor/anchor",
-    "modal": "./components/modal/modal"
+    "modal": "./components/modal/modal",
+    "login": "./components/login/login"
   }
 }

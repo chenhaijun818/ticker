@@ -1,0 +1,4 @@
+<!--components/login/login.wxml-->
+<view class="buttons">
+    <button bindtap="login">登录</button>
+</view>

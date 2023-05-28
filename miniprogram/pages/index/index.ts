@@ -8,7 +8,8 @@ Page({
         todoList: [] as any,
         todos: [] as any,
         countup: 0,
-        todoTime: 30 * 60 * 1000
+        todoTime: 30 * 60 * 1000,
+        token: ''
     },
     ticker: 0,
     todoMap: new Map(),
@@ -17,7 +18,9 @@ Page({
 
     },
     onShow() {
-        console.log('index on show')
+        this.setData({
+            token: wx.getStorageSync('token')
+        })
         this.getTodoList().then(() => {
             const startTime = wx.getStorageSync('startTime');
             if (startTime) {

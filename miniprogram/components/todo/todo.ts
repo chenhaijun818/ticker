@@ -22,7 +22,7 @@ Component({
         },
         onActionSheet() {
             wx.showActionSheet({
-                itemList: ['修改', '添加子项目', '删除项目', '立即执行', 'disable']
+                itemList: ['修改', '添加子项目', '删除项目', '立即执行', '禁用/启用']
             }).then(res => {
                 if (res.tapIndex === 0) {
                     console.log('edit')

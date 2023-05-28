@@ -8,7 +8,8 @@ const ui = new UiService();
 Page<{
     parent: Todo | null;
     todoList: Todo[];
-    delTodo: Todo | null
+    delTodo: Todo | null;
+    token: string;
 }, {
     getTodoList(): void;
     onChooseParent(e: any): void;
@@ -21,12 +22,14 @@ Page<{
     data: {
         parent: null,
         todoList: [],
-        delTodo: null
+        delTodo: null,
+        token: ''
     },
     todoMap: new Map(),
     onLoad() {
     },
     onShow() {
+        this.setData({token: wx.getStorageSync('token')})
         this.getTodoList();
     },
     getTodoList() {
