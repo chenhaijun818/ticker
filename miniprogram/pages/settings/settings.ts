@@ -75,11 +75,15 @@ Page<{
         this.setData({delTodo})
     },
     async add() {
-        const name = await ui.input('请输入待办名称');
+        const [name, time, enable] = await ui.input('请输入任务信息', [
+            {placeholder: '任务名称', type: 'text'},
+            {placeholder: '任务时长(分钟)', type: 'text'},
+            {placeholder: '是否启用', type: 'radio'}
+        ]);
         if (!name) {
             return;
         }
-        client.post('add', {name}).then(res => {
+        client.post('add', {name, time, enable}).then(res => {
             if (res) {
                 this.getTodoList();
             }

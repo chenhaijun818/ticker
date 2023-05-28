@@ -25,7 +25,7 @@ Component({
                 itemList: ['修改', '添加子项目', '删除项目', '立即执行', '禁用/启用']
             }).then(res => {
                 if (res.tapIndex === 0) {
-                    console.log('edit')
+                    this.edit();
                 }
                 if (res.tapIndex === 1) {
                     this.add();
@@ -38,12 +38,34 @@ Component({
                 }
             }).catch(console.log)
         },
-        async add() {
-            const name = await ui.input('请输入待办名称');
+        async edit() {
+            const todo = this.data.todo;
+            const [name, time, enable] = await ui.input('请输入任务信息', [
+                {placeholder: '任务名称', type: 'text', value: todo.name},
+                {placeholder: '任务时长(分钟)', type: 'text', value: todo.time},
+                {placeholder: '是否启用', type: 'radio', value: todo.enable}
+            ]);
+            console.log(name, time, enable)
             if (!name) {
-                return
+                return;
             }
-            client.post('add', {name, pid: this.data.todo.id}).then(res => {
+            client.post('update', {name, time, enable, id: todo.id}).then(res => {
+                if (res) {
+                    ui.toast('修改成功')
+                    this.triggerEvent('change')
+                }
+            })
+        },
+        async add() {
+            const [name, time, enable] = await ui.input('请输入任务信息', [
+                {placeholder: '任务名称', type: 'text'},
+                {placeholder: '任务时长(分钟)', type: 'text'},
+                {placeholder: '是否启用', type: 'radio'}
+            ]);
+            if (!name) {
+                return;
+            }
+            client.post('add', {name, time, enable, pid: this.data.todo.id}).then(res => {
                 if (res) {
                     ui.toast('添加成功')
                     this.triggerEvent('change')

@@ -16,13 +16,14 @@ interface ModalOptions {
     cancelColor?: string,
     titleColor?: string
     editable?: boolean;
+    items?: any[];
 
     success?(res: any): void
 }
 
 interface DismissResult {
     id: string,
-    value: string,
+    values: any[],
     confirm: boolean,
     cancel: boolean
 }
@@ -50,12 +51,13 @@ export class ModalService {
                 confirmText: options.confirmText || '确认',
                 cancelText: options.cancelText || '取消',
                 editable: options.editable,
-                complete: (res: any) => {
+                items: options.items || [],
+                complete: (res: DismissResult) => {
                     if (options.editable) {
                         if (typeof options.success === 'function') {
-                            options.success(res.value);
+                            options.success(res.values);
                         }
-                        resolve(res.value);
+                        resolve(res.values);
                     } else {
                         if (typeof options.success === 'function') {
                             options.success(res.confirm);
@@ -69,7 +71,7 @@ export class ModalService {
             this.onShowSubscribers.forEach(fn => fn(m))
         });
         p.dismiss = () => {
-            this.dismiss({id, confirm: false, cancel: true, value: ''})
+            this.dismiss({id, confirm: false, cancel: true, values: []})
         }
         return p;
     }

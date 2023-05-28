@@ -4,7 +4,16 @@
     <view class="title" style="color: {{modal.titleColor}}">{{modal.title}}</view>
     <scroll-view scroll-y class="content">
         <slot name="content"></slot>
-        <input model:value="{{value}}" bindconfirm="onConfirm" wx:if="{{modal.editable}}"/>
+        <view wx:if="{{modal.editable}}">
+            <block wx:for="{{modal.items}}" wx:for-item="i" wx:key="index">
+                <input class="item" wx:if="{{i.type === 'text'}}" data-index="{{index}}" placeholder="{{i.placeholder}}" bindinput="onInput" value="{{i.value}}"/>
+                <radio-group class="item" wx:if="{{i.type === 'radio'}}" data-index="{{index}}" bindchange="onChange">
+                    <view>{{i.placeholder}}:</view>
+                    <radio value="1" checked="{{i.value}}">是</radio>　　
+                    <radio value="0" checked="{{!i.value}}">否</radio>
+                </radio-group>
+            </block>
+        </view>
     </scroll-view>
     <view class="buttons">
         <button class="button cancel" bindtap="onCancel" data-id="{{modal.id}}">{{modal.cancelText}}</button>

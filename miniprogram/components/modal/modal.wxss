@@ -33,7 +33,9 @@
     max-height: 40vh;
     min-height: 2em;
 }
-
+.content .item {
+    margin: 10rpx 0;
+}
 .content input {
     border: 1px solid #ccc;
     padding: 6rpx;

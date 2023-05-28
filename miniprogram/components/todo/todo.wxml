@@ -1,6 +1,6 @@
 <view class="container {{close ? 'close' : ''}}">
     <view class="caption {{todo.children.length ? 'parent' : ''}}">
-        <text class="name" bindtap="toggle">{{todo.name}}</text>
+        <text class="name {{todo.enable ? '' : 'disabled'}}" bindtap="toggle">{{todo.name}}</text>
         <text class="iconfont icon-setting-fill" bindtap="onActionSheet"></text>
     </view>
     <todo wx:for="{{todo.children}}" wx:key="id" wx:for-item="child" todo="{{child}}" bindchange="onChange" binddoit="onDoit"></todo>

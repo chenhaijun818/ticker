@@ -64,8 +64,8 @@ export class UiService {
     /*
     *   弹窗输入
     * */
-    input(title: string): Promise<string | void> {
-        return modal.showModal({title, editable: true});
+    input(title: string, items: any[]): Promise<any[]> {
+        return modal.showModal({title, editable: true, items});
     }
 
     /*

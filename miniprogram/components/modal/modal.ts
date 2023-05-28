@@ -20,9 +20,15 @@ Component({
      * 组件的初始数据
      */
     data: {
-        value: ''
+        values: [] as any
     },
-
+    lifetimes: {
+        attached() {
+            this.data.modal.items.forEach((e: any, i: any) => {
+                this.data.values[i] = e.value;
+            })
+        }
+    },
     /**
      * 组件的方法列表
      */
@@ -31,7 +37,7 @@ Component({
             const id: string = e.currentTarget.dataset.id;
             modal.dismiss({
                 id: id,
-                value: '',
+                values: [],
                 confirm: false,
                 cancel: true
             });
@@ -41,11 +47,21 @@ Component({
             const id: string = e.currentTarget.dataset.id;
             modal.dismiss({
                 id: id,
-                value: this.data.value,
+                values: this.data.values,
                 confirm: true,
                 cancel: false
             });
             this.triggerEvent('confirm')
+        },
+        // 输入事件
+        onInput(e: any) {
+            const index = e.currentTarget.dataset.index;
+            this.data.values[index] = e.detail.value;
+        },
+        // 选择事件
+        onChange(e: any) {
+            const index = e.currentTarget.dataset.index;
+            this.data.values[index] = e.detail.value;
         }
     }
 })

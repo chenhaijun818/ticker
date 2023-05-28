@@ -4,6 +4,10 @@
   display: block;
 }
 .container {
+  .caption.parent .name {
+    font-weight: bold;
+    color: #000;
+  }
   .caption {
     display: flex;
     align-items: center;
@@ -17,19 +21,13 @@
     .name {
       margin-right: 30rpx;
     }
-    //.button {
-    //  background: #eee;
-    //  width: 1em;
-    //  height: 1em;
-    //  margin: 0 10rpx;
-    //  line-height: 1;
-    //  text-align: center;
-    //}
+
+    .name.disabled {
+      color: red;
+    }
+
   }
-  .caption.parent .name {
-    font-weight: bold;
-    color: #000;
-  }
+
   todo {
     padding-left: 64rpx;
   }
