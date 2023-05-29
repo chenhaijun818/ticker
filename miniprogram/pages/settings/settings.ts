@@ -91,15 +91,20 @@ Page<{
     },
     onDoit(event: any) {
         const now = Date.now();
-        wx.setStorageSync('startTime', now);
         const tid = event.detail.tid;
         const todo: Todo = this.todoMap.get(tid) as Todo;
+        if (!todo.enable) {
+            ui.toast('该项目已被禁用')
+            return
+        }
         const todos: Todo[] = [];
         const todoMap = this.todoMap;
+        wx.setStorageSync('startTime', now);
         setTodos(todo);
         const ids = todos.map(t => t.id).join(',')
         wx.setStorageSync('tids', ids);
         wx.switchTab({url: '/pages/index/index'})
+
         function setTodos(todo: Todo) {
             todos.unshift(todo);
             if (todo.pid) {

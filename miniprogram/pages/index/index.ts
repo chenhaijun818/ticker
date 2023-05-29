@@ -9,6 +9,7 @@ Page({
         todos: [] as any,
         countup: 0,
         todoTime: 30 * 60 * 1000,
+        restTime: 30 * 60 * 1000,
         token: ''
     },
     ticker: 0,
@@ -117,6 +118,10 @@ Page({
         const tids = wx.getStorageSync('tids');
         const todos = tids.split(',').filter((tid: string) => tid).map((tid: string) => this.todoMap.get(tid))
         this.setData({todos});
+        const todo = todos.pop();
+        if (todo && todo.time) {
+            this.setData({todoTime: todo.time * 60 * 1000})
+        }
     },
     // 随机选取数组的其中一个
     random(list: Todo[]): Todo {
