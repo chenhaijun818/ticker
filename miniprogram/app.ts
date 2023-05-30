@@ -9,8 +9,8 @@ const ui = new UiService();
 // 添加网络拦截, 给每次请求自动加上api域名
 client.addBeforeInterceptor((request) => {
     let {url} = request;
-    // request.url = `https://api.traco.tech:3100/${url}`;
-    request.url = `https://localhost:3100/${url}`;
+    request.url = `https://api.traco.tech:3100/${url}`;
+    // request.url = `https://localhost:3100/${url}`;
     return request
 });
 

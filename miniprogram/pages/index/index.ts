@@ -1,8 +1,11 @@
 // index.ts
 import {Client} from "../../core/client";
 import {Todo} from "../../models/todo";
+import {UiService} from "../../core/ui.service";
 
 const client = new Client();
+const ui = new UiService();
+
 Page({
     data: {
         todoList: [] as any,
@@ -15,8 +18,10 @@ Page({
     ticker: 0,
     todoMap: new Map(),
     todoList: [] as any,
+    ringFlag: true,
     onLoad() {
-
+        const restTime = wx.getStorageSync('restTime') || 30;
+        this.setData({restTime: restTime * 60 * 1000})
     },
     onShow() {
         this.setData({
@@ -29,6 +34,14 @@ Page({
                 this.setTodos();
             }
         });
+    },
+    async setting() {
+        const oldTime = wx.getStorageSync('restTime') || 30;
+        const [restTime] = await ui.input('请输入休息时长', [{type: 'text', value: oldTime}]);
+        if (restTime) {
+            wx.setStorageSync('restTime', restTime)
+            this.setData({restTime: restTime * 60 * 1000})
+        }
     },
     getTodoList() {
         return client.get('todoList').then((res: any) => {
@@ -64,6 +77,14 @@ Page({
             }
         })
     },
+    playDing() {
+        const manager = wx.getBackgroundAudioManager();
+        manager.title = 'ding';
+        manager.src = 'https://ticker-app.oss-cn-beijing.aliyuncs.com/ding.wav'
+        manager.onCanplay(() => {
+            manager.play();
+        });
+    },
     // 开始循环
     startTick() {
         if (this.ticker) {
@@ -76,7 +97,19 @@ Page({
             }
             const now = Date.now();
             const usedTime = now - startTime;
-            this.setData({countup: usedTime})
+            this.setData({countup: usedTime});
+            if (!this.data.todos.length) {
+                if (usedTime > this.data.restTime && this.ringFlag) {
+                    this.playDing();
+                    this.ringFlag = false;
+                }
+            }
+            if (this.data.todos.length) {
+                if (usedTime > this.data.todoTime && this.ringFlag) {
+                    this.playDing();
+                    this.ringFlag = false;
+                }
+            }
         }, 1000);
     },
     // 开始学习
@@ -89,6 +122,7 @@ Page({
         this.setTodos();
         this.setData({countup: 0});
         this.startTick();
+        this.ringFlag = true;
     },
     // 开始休息
     startRest() {
@@ -98,6 +132,7 @@ Page({
         this.setTodos();
         this.setData({countup: 0});
         this.startTick();
+        this.ringFlag = true;
     },
     // 随机选择一个待办事项
     chooseTodo(todos: Todo[]): Todo[] {
@@ -106,6 +141,10 @@ Page({
             todos.push(todo);
         }
         const todo = todos[todos.length - 1];
+        if (!todo.enable) {
+            // 如果是被禁用项目，就重新选择
+            return this.chooseTodo([])
+        }
         if (!todo!.children.length) {
             return todos
         }

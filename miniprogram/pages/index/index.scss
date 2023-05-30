@@ -9,8 +9,8 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 95vh;
   line-height: 1.8;
+  height: 100%;
   .todos {
     display: flex;
     flex-direction: column;
@@ -25,6 +25,13 @@ page {
      margin: 0 10rpx;
    }
  }
+}
+
+.setting {
+  position: fixed;
+  left: 20rpx;
+  top: 20rpx;
+  font-size: 56rpx;
 }
 
 .green {
